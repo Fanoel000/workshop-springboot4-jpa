@@ -75,29 +75,33 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	
+	//hashCode, serve Transformar um objeto em um número inteiro único
+	//Esse número serve organizar e encontrar objetos mais rápido
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
+		final int prime = 31; //padrão 31 evita erros
+		int result = 1; //inicio
+		//operador ternário. Se id for nulo → use 0 ou id.hashCode().
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) //igualdade de objetos na memoria = true
 			return true;
-		if (obj == null)
+		if (obj == null) //objeto = null => false
 			return false;
-		if (getClass() != obj.getClass())
+		if (getClass() != obj.getClass())//verifica se os dois objetos são do mesmo "tipo"
 			return false;
-		User other = (User) obj;
+		
+		//Casting de obj para User => Assume valores da classe User
+		User other = (User) obj;//User da propria classe é um casting
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null)//se id for null e id dif nulo logo false
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!id.equals(other.id))//“Senão, se o meu ID for diferente do ID do outro usuário…”
 			return false;
-		return true;
+		return true; //Os IDs não são diferentes — ou seja, são iguais (ou ambos são null).
 	}
 }
