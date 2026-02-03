@@ -19,11 +19,11 @@ public class UserResource {
 	//Colocando uma dependência no UserService. E @Autowired p fazer a inj de depen
 	@Autowired
 	private UserService service;
-	
-	@GetMapping
+		
 	//Testa o recurso User. com o metodo especifico do Spring o ResponseEntity
 	//Que retorna respostas e requisições web
 	//O tipo de resposta é a class User. E findAll é o nome do método.
+	@GetMapping
 	public ResponseEntity<List<User>> findAll() {
 		List<User> list = service.findAll() ;
 		return ResponseEntity.ok().body(list);
