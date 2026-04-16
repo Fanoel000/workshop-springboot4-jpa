@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 
 import com.educandoweb.course.entities.Order;
 import com.educandoweb.course.entities.User;
+import com.educandoweb.course.entities.enums.OrderStatus;
 import com.educandoweb.course.repositories.OrderRepository;
 import com.educandoweb.course.repositories.UserRepository;
 
@@ -43,9 +44,9 @@ public class TestConfig implements CommandLineRunner { //Ver interface CommandLi
 		//Cria o primeiro pedido do usuário 1
 		//Cria o segundo pedido do usuário 2
 		//Cria o terceiro pedido do usuário 1
-		Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), u1);
-		Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), u2);
-		Order o3 = new Order(null, Instant.parse("2019-07-22T15:53:22Z"), u1);
+		Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), OrderStatus.PAID, u1);
+		Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), OrderStatus.WAITING_PAYMENT, u2);
+		Order o3 = new Order(null, Instant.parse("2019-07-22T15:53:22Z"), OrderStatus.WAITING_PAYMENT, u1);
 		
 		//salva os objetos, os usuarios u1 e u2. em um arrayList dentro Repository
     	//Arrays.asList => cria um arrayList e logo diz salve  as instâncias u1,u2
