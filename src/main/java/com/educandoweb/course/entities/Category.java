@@ -1,7 +1,9 @@
 package com.educandoweb.course.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,6 +20,9 @@ public class Category implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long id;
 	private String nome;
+	
+	//Associação entre tabelas (Category vs Product)
+	private Set<Product> products = new HashSet<>();
 	
 	//construtor vazio
 	public Category () {}
@@ -43,7 +48,14 @@ public class Category implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+	
+	//No checklist da página 5 diz q (collections: only get)
+		//Usa só o get, pois não vai trocar a coleção só add e remover elementso dela
+	public Set<Product> getProducts() {
+		return products;
+	}
+	
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -60,6 +72,5 @@ public class Category implements Serializable {
 		Category other = (Category) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
+			
 }
