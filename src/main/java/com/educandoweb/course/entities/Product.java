@@ -9,6 +9,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 //Dentro de Product tenho um lista de Caterogy e vice verso
@@ -29,8 +32,14 @@ public class Product implements Serializable {
 	//Set é para garantir q não vai ter um produto com mais 
 	//de uma ocorrência da mesma Categoria
 	//O @Transient n precisou p Category e Product
+	@ManyToMany  //Associação muitos p muitos entre Product e Category
+	//Chave da associação tb_product_category
+	//JoinColumn Chave estrangeira p associação product_id
+	@JoinTable(name = "tb_product_category",
+	joinColumns = @JoinColumn(name = "product_id"),
+	inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private Set<Category> categories = new HashSet<>();
-	
+	//inverseJoinColumns Define a chave estrangeira de outra entidade
 	public Product () {
 		
 	}
