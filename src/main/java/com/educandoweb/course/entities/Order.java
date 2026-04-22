@@ -9,6 +9,7 @@ import java.util.Set;
 import com.educandoweb.course.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +17,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -46,6 +48,10 @@ public class Order implements Serializable {
 	//Criar associação 1 p muitos na Order
 	@OneToMany(mappedBy = "id.order")
 	private Set<OrderItem> items = new HashSet<>();
+	
+	//Associação 1 pedido(Order). Tem um Payment pgto também
+	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+	private Payment payment;
 	
 	public Order () {
 		
@@ -94,11 +100,19 @@ public class Order implements Serializable {
 	public void setClient(User client) {
 		this.client = client;
 	}
+	//Getter e Setter de Payment do pagamento
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
 	
 	public Set<OrderItem> getItem(){
 		return items;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
