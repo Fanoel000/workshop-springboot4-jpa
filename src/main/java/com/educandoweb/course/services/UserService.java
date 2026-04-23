@@ -21,8 +21,8 @@ public class UserService {
 	//Método q retorna todos os usúarios tipo da lista é User
 	//Feito a operação na camada de serviço q é o findAll
 	//Que repassa a chamada para repository.findAll()
-	public List<User> findAll(){
-		return repository.findAll();
+	public List<User> findAll(){ //==> diz vou entregar uma lista tipo User
+		return repository.findAll(); //==> Busca a lista no repositorio
 		
 	}
 	
@@ -30,5 +30,10 @@ public class UserService {
 	public User findById(Long id) {
 		Optional<User> obj = repository.findById(id);
 		return obj.get();
+	}
+	
+	//Inserir no banco de dados um novo obj do tipo User
+	public User insert(User obj) {
+		return repository.save(obj);
 	}
 }
