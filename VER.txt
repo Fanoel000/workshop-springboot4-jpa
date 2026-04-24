@@ -1,0 +1,3 @@
+Aula n 293 O tratamento de Exception
+no Delete não ficou igual
+ver começo do video
